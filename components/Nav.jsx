@@ -36,7 +36,7 @@ const Nav = () => {
           className='object-contain'
         />
         <Image
-          src='/assets/images/Scratch_Logo.svg'
+          src='/assets/images/scratch_logo.png'
           alt='logo'
           width={150}
           height={50}

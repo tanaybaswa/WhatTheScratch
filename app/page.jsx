@@ -17,7 +17,7 @@ const Home = () => (
 
       <Image
       className="rotate-[-3deg] relative left-12"
-      src={"/assets/images/Scratch_Logo.svg"}
+      src={"/assets/images/scratch_logo.png"}
       width={450}
       height={200}
       alt="Scratch Logo"

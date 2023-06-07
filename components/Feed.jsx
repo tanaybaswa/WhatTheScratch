@@ -2,7 +2,10 @@
 
 import { useState, useEffect } from "react";
 
+import Dropdown from "./Dropdown";
+
 import PromptCard from "./PromptCard";
+import { set } from "mongoose";
 
 const PromptCardList = ({ data, handleTagClick }) => {
   return (
@@ -23,6 +26,7 @@ const Feed = () => {
 
   // Search states
   const [searchText, setSearchText] = useState("");
+  const [difficulty, setDifficulty] = useState("All Difficulties");
   const [searchTimeout, setSearchTimeout] = useState(null);
   const [searchedResults, setSearchedResults] = useState([]);
 
@@ -33,8 +37,10 @@ const Feed = () => {
     setAllPosts(data);
   };
 
+
   useEffect(() => {
     fetchPosts();
+    console.log("Fetched all posts");
   }, []);
 
   const filterPrompts = (searchtext) => {
@@ -47,6 +53,23 @@ const Feed = () => {
     );
   };
 
+  const filterPromptsByDifficulty = (selectedDifficulty) => {
+    return allPosts.filter(
+      (item) =>
+        item.diff === selectedDifficulty
+    );
+  };
+
+  const handleDifficultyChange = (e) => {
+    setDifficulty(e.target.value);
+    console.log(difficulty);
+
+    const searchResult = filterPosts(searchText, e.target.value);
+    setSearchedResults(searchResult);
+  }
+
+
+
   const handleSearchChange = (e) => {
     clearTimeout(searchTimeout);
     setSearchText(e.target.value);
@@ -54,11 +77,50 @@ const Feed = () => {
     // debounce method
     setSearchTimeout(
       setTimeout(() => {
-        const searchResult = filterPrompts(e.target.value);
+        const searchResult = filterPosts(e.target.value, difficulty);
         setSearchedResults(searchResult);
       }, 500)
     );
   };
+
+  const handlePostsChange = (text, diff) => {
+
+  }
+
+  const filterPosts = (text, diff) => {
+
+    console.log("filterPosts working");
+    const regexp = new RegExp(text, 'i');
+
+    if(text && diff !== "All Difficulties"){
+      return allPosts.filter((item) => 
+        item.diff === diff && (
+          regexp.test(item.creator.username) ||
+          regexp.test(item.tag) ||
+          regexp.test(item.prompt)
+        )
+      );
+    } else if(text){
+      return allPosts.filter((item) => 
+        regexp.test(item.creator.username) ||
+        regexp.test(item.tag) ||
+        regexp.test(item.prompt)
+      );
+
+    } else if (diff !== "All Difficulties") {
+      return allPosts.filter((item) => 
+        item.diff === diff
+      );
+
+    } else {
+      return allPosts
+    };
+  };
+
+
+
+
+
 
   const handleTagClick = (tagName) => {
     setSearchText(tagName);
@@ -69,7 +131,11 @@ const Feed = () => {
 
   return (
     <section className='feed'>
-      <form className='relative w-full flex-center'>
+      <div className="flex w-full gap-2 items-center">
+
+        {/* <h1>{difficulty}</h1> */}
+
+      <form className='w-[70%] flex box-border'>
         <input
           type='text'
           placeholder='Search for a tag or a username or keyword'
@@ -77,11 +143,14 @@ const Feed = () => {
           onChange={handleSearchChange}
           required
           className='search_input peer'
-        />
+          />
       </form>
 
+      <Dropdown handleChange={handleDifficultyChange}/>
+
+      </div>
       {/* All Prompts */}
-      {searchText ? (
+      {searchText || difficulty != "All Difficulties"? (
         <PromptCardList
           data={searchedResults}
           handleTagClick={handleTagClick}

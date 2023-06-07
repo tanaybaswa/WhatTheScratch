@@ -9,6 +9,7 @@ const PromptCard = ({ post, handleEdit, handleDelete, handleTagClick }) => {
   const { data: session } = useSession();
   const pathName = usePathname();
   const router = useRouter();
+  const color = "green";
 
   const [copied, setCopied] = useState("");
 
@@ -45,9 +46,9 @@ const PromptCard = ({ post, handleEdit, handleDelete, handleTagClick }) => {
             <h3 className='font-satoshi font-semibold text-gray-900'>
               {post.creator.username}
             </h3>
-            <p className='font-inter text-sm text-gray-500'>
+            {/* <p className='font-inter text-sm text-gray-500'>
               {post.creator.email}
-            </p>
+            </p> */}
           </div>
         </div>
 
@@ -70,8 +71,21 @@ const PromptCard = ({ post, handleEdit, handleDelete, handleTagClick }) => {
         className='font-inter text-sm blue_gradient cursor-pointer'
         onClick={() => handleTagClick && handleTagClick(post.tag)}
       >
-        #{post.tag}
+        {post.tag}
       </p>
+
+      {post.diff == 'Hard'?(<p className="font-bold text-md font-satoshi my-2 text-red-600">
+        {post.diff}
+      </p>):<></>}
+
+      {post.diff == 'Medium'?(<p className="font-bold text-md font-satoshi my-2 text-orange-500">
+        {post.diff}
+      </p>):<></>}
+
+      {post.diff == 'Easy'?(<p className="font-bold text-md font-satoshi my-2 text-green-500">
+        {post.diff}
+      </p>):<></>}
+
 
       {session?.user.id === post.creator._id && pathName === "/profile" && (
         <div className='mt-5 flex-center gap-4 border-t border-gray-100 pt-3'>

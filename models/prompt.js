@@ -12,6 +12,11 @@ const PromptSchema = new Schema({
   tag: {
     type: String,
     required: [true, 'Tag is required.'],
+  },
+  diff: {
+    type: String,
+    required: [true, 'Difficulty is required.'],
+    default: "Medium",
   }
 });
 

@@ -1,4 +1,5 @@
 import Feed from "@components/Feed";
+import Footer from "@components/Footer";
 import Image from "next/image";
 
 const Home = () => (
@@ -36,6 +37,7 @@ const Home = () => (
     </p>
 
     <Feed />
+    <Footer />
   </section>
 );
 

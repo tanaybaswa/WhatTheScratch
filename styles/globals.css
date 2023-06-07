@@ -109,7 +109,15 @@
 }
 
 .search_input {
-  @apply block w-full rounded-md border border-gray-200 bg-white py-2.5 font-satoshi pl-5 pr-12 text-sm shadow-lg font-medium focus:border-black focus:outline-none focus:ring-0;
+  @apply block w-full rounded-md border-2 border-gray-200 bg-white py-2.5 font-satoshi pl-5 pr-12 text-sm shadow-lg font-medium focus:border-orange-500 focus:outline-none focus:ring-0;
+}
+
+.dropdown_input {
+  @apply block w-32 pl-2 rounded-md border border-gray-200 bg-white py-2.5 font-satoshi text-sm shadow-lg font-medium focus:border-black focus:outline-none focus:ring-0;
+}
+
+.dropdown_menu{
+  @apply mt-2 w-16 absolute bg-white rounded-b-md shadow-lg block;
 }
 
 .copy_btn {
@@ -172,6 +180,20 @@
   @apply flex justify-between items-center;
 }
 
-.scratch {
-  font-family: 'Kavoon', cursive;
+.custom_color_red {
+  color: red;
 }
+
+.custom_color_green {
+  color: rgb(0, 190, 0);
+}
+
+.custom_color_orange {
+  color: rgb(245, 142, 64);
+}
+
+.custom_color_gray {
+  color: rgb(164, 164, 164);
+}
+
+

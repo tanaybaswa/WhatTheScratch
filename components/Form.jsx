@@ -22,8 +22,9 @@ const Form = ({ type, post, setPost, submitting, handleSubmit }) => {
         <span className='orange_gradient'>{type} Post</span>
       </h1>
       <p className='desc text-left max-w-md'>
-        {type} and share your amazing ideas with the world!
-        Remember to include any tags and the level of difficulty!
+        {type} your scratch idea here!
+        <br/>
+        Remember to include tag(s) and choose difficulty. 
       </p>
 
       <form
@@ -31,7 +32,7 @@ const Form = ({ type, post, setPost, submitting, handleSubmit }) => {
         className='mt-10 w-full max-w-2xl flex flex-col gap-7 glassmorphism'
       >
         <label>
-          <span className='font-satoshi font-semibold text-base text-gray-700 pl-1'>
+          <span className='font-satoshi font-bold text-lg text-gray-800 pl-1'>
             Your Idea:
           </span>
 
@@ -45,7 +46,7 @@ const Form = ({ type, post, setPost, submitting, handleSubmit }) => {
         </label>
 
         <label>
-          <span className='font-satoshi font-semibold text-base text-gray-700 pl-1'>
+          <span className='font-satoshi font-semibold text-lg text-gray-800 pl-1'>
             Tags{" "}
             <span className='font-normal'>
               (game, animation, physics, etc.)
@@ -64,7 +65,7 @@ const Form = ({ type, post, setPost, submitting, handleSubmit }) => {
         </label>
         
         <label>
-          <span className='font-satoshi flex font-semibold text-base text-gray-700 w-full mb-1 pl-1'>
+          <span className='font-satoshi flex font-semibold text-lg text-gray-800 w-full mb-1 pl-1'>
             Difficulty
           </span>
           {/* <input
@@ -81,14 +82,14 @@ const Form = ({ type, post, setPost, submitting, handleSubmit }) => {
         
 
         <div className='flex-end mx-3 mb-5 gap-4'>
-          <Link href='/' className='text-gray-500 text-sm'>
+          <Link href='/' className='outline_btn'>
             Cancel
           </Link>
 
           <button
             type='submit'
             disabled={submitting}
-            className='px-5 py-1.5 text-lg bg-primary-orange rounded-full text-white'
+            className='px-5 py-1.5 text-lg black_btn'
           >
             {submitting ? `${type}ing...` : type}
           </button>

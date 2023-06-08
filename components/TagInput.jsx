@@ -35,14 +35,14 @@ const TagInput = ({tags, setTags}) => {
             />
             {index > 0 && (
                 <button type="button" onClick={() => handleRemoveTag(index)} className='ml-2'>
-                <AiOutlineClose size={20} fill='gray'/>
+                <AiOutlineClose size={20} fill='black'/>
                 </button>
             )}
             </div>
         </div>
       ))}
-      {tags.length < 6 && <button type="button" onClick={handleAddTag} className='flex items-center text-gray-500'>
-        <AiOutlinePlus size={20} fill='gray'/>
+      {tags.length < 6 && <button type="button" onClick={handleAddTag} className='flex items-center text-gray-700'>
+        <AiOutlinePlus size={20} fill='black'/>
         Add Tag
       </button>
         }

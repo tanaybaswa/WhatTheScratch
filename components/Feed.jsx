@@ -6,8 +6,20 @@ import Dropdown from "./Dropdown";
 
 import PromptCard from "./PromptCard";
 import { set } from "mongoose";
+import { useSelectedLayoutSegment } from "next/navigation";
+import Loading from "@app/profile/loading";
 
 const PromptCardList = ({ data, handleTagClick }) => {
+
+  if(!data || data.length == 0){
+    return (
+      <div className="my-14 text-3xl desc text-center">
+        <Loading/>
+        Loading posts. <br/> Please reload page if needed.
+      </div>
+    )
+  };
+
   return (
     <div className='mt-16 prompt_layout'>
       {data.map((post) => (
@@ -22,9 +34,8 @@ const PromptCardList = ({ data, handleTagClick }) => {
 };
 
 const Feed = () => {
-  const [allPosts, setAllPosts] = useState([]);
-
   // Search states
+  const [allPosts, setAllPosts] = useState([]);
   const [searchText, setSearchText] = useState("");
   const [difficulty, setDifficulty] = useState("All Difficulties");
   const [searchTimeout, setSearchTimeout] = useState(null);
@@ -45,32 +56,13 @@ const Feed = () => {
     console.log("Fetched all posts");
   }, []);
 
-  const filterPrompts = (searchtext) => {
-    const regex = new RegExp(searchtext, "i"); // 'i' flag for case-insensitive search
-    return allPosts.filter(
-      (item) =>
-        regex.test(item.creator.username) ||
-        regex.test(item.tag) ||
-        regex.test(item.prompt)
-    );
-  };
-
-  const filterPromptsByDifficulty = (selectedDifficulty) => {
-    return allPosts.filter(
-      (item) =>
-        item.diff === selectedDifficulty
-    );
-  };
-
   const handleDifficultyChange = (e) => {
     setDifficulty(e.target.value);
-    console.log(difficulty);
+    //console.log(difficulty);
 
     const searchResult = filterPosts(searchText, e.target.value);
     setSearchedResults(searchResult);
   }
-
-
 
   const handleSearchChange = (e) => {
     clearTimeout(searchTimeout);
@@ -85,13 +77,9 @@ const Feed = () => {
     );
   };
 
-  const handlePostsChange = (text, diff) => {
-
-  }
-
   const filterPosts = (text, diff) => {
 
-    console.log("filterPosts working");
+    //console.log("filterPosts working");
     const regexp = new RegExp(text, 'i');
 
     if(text && diff !== "All Difficulties"){
@@ -120,10 +108,6 @@ const Feed = () => {
   };
 
 
-
-
-
-
   const handleTagClick = (tagName) => {
     setSearchText(tagName);
 
@@ -134,8 +118,6 @@ const Feed = () => {
   return (
     <section className='feed'>
       <div className="flex w-full gap-2 items-center">
-
-        {/* <h1>{difficulty}</h1> */}
 
       <form className='w-[70%] flex box-border'>
         <input
@@ -151,7 +133,7 @@ const Feed = () => {
       <Dropdown handleChange={handleDifficultyChange} isAll={true}/>
 
       </div>
-      {/* All Prompts */}
+      
       {searchText || difficulty != "All Difficulties"? (
         <PromptCardList
           data={searchedResults}

@@ -1,3 +1,4 @@
+"use client";
 import React, {useState} from 'react'
 
 // const Dropdown = ({handleChange}) => {
@@ -56,11 +57,8 @@ const Dropdown = ({handleChange, isAll}) => {
 
 
   const handleSelect = (e) => {
-    handleChange(e);
-  }
-
-  const handleClick = (e) => {
     const name = e.target.value;
+    // console.log(name);
     
     if(name == "Easy"){
       setcolor("custom_color_green")
@@ -71,11 +69,16 @@ const Dropdown = ({handleChange, isAll}) => {
     } else{
       setcolor("custom_color_gray")
     }
-    
-  }
+
+    handleChange(e);
+  };
+
+  const handleClick = (e) => {
+  
+  };
 
   return (
-    <select className={`${color} py-2.5 pl-2 leading-8 border-2 border-gray-300 bg-white rounded-md cursor-pointer font-semibold font-satoshi shadow-lg focus:border-orange-500 focus:ring-0 w-max-content box-border`}
+    <select className={`${color} text-lg py-2.5 pl-2 leading-8 border-2 border-gray-300 bg-white rounded-md cursor-pointer font-bold font-satoshi shadow-lg focus:border-orange-500 w-max-content box-border`}
     onChange={handleSelect}
     >
       

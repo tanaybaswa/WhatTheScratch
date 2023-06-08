@@ -105,7 +105,7 @@
 }
 
 .desc {
-  @apply mt-5 text-black sm:text-2xl max-w-2xl font-semibold;
+  @apply mt-5 text-blue-400 text-xl sm:text-2xl max-w-2xl font-satoshi font-semibold;
 }
 
 .search_input {
@@ -125,7 +125,7 @@
 }
 
 .glassmorphism {
-  @apply rounded-xl border border-gray-200 bg-white/60 shadow-[inset_10px_-50px_94px_0_rgb(199,199,199,0.8)] backdrop-blur p-5;
+  @apply rounded-xl border border-gray-200 bg-white/60 shadow-[inset_30px_-80px_180px_170px_rgb(59,130,246,0.55)] backdrop-blur p-5;
 }
 
 .prompt_layout {
@@ -160,7 +160,7 @@
 }
 
 .dropdown_link {
-  @apply text-sm font-inter text-gray-700 hover:text-gray-500 font-medium;
+  @apply text-lg font-satoshi text-blue-500 hover:text-blue-300 font-semibold;
 }
 
 /* PromptCard Component */
@@ -169,8 +169,17 @@
 }
 
 .prompt_card_two {
-  @apply flex-1 shadow-[inset_10px_-50px_94px_0_rgb(200,200,200,0.2)] break-inside-avoid rounded-lg border border-gray-300 bg-white/40 bg-clip-padding p-6 pb-4 backdrop-blur-lg backdrop-filter md:w-[360px] w-full h-fit;
+  @apply flex-1 break-inside-auto border border-gray-300 bg-white/40 bg-clip-padding p-6 pb-4 backdrop-blur-lg backdrop-filter md:w-[360px] w-full h-fit;
 }
+
+.prompt_card_three {
+  @apply flex-1 shadow-[inset_10px_-50px_94px_0_rgb(200,200,200,0.2)] break-inside-avoid rounded-t-3xl border border-gray-300 bg-white/40 bg-clip-padding p-6 pb-4 backdrop-blur-lg backdrop-filter md:w-[360px] w-full h-fit;
+}
+
+.prompt_card_top {
+  @apply flex shadow-[inset_0px_-40px_90px_0_rgb(200,200,200,0.5)] break-inside-avoid rounded-t-3xl border border-gray-300 bg-white/40 bg-clip-padding p-6 pb-4 backdrop-blur-lg backdrop-filter md:w-[360px] w-full h-fit;
+}
+
 
 .flex-center {
   @apply flex justify-center items-center;
@@ -204,4 +213,8 @@
   color: rgb(164, 164, 164);
 }
 
+
+.text-shadow {
+  text-shadow: 1px 1px 1px rgba(0, 53, 123, 0.6);
+}
 

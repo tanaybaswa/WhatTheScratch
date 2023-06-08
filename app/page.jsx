@@ -2,6 +2,7 @@ import Feed from "@components/Feed";
 import Footer from "@components/Footer";
 import Image from "next/image";
 
+
 const Home = () => (
   <section className='w-full flex-center flex-col'>
     <Image
@@ -16,20 +17,20 @@ const Home = () => (
     <div className="flex">
 
       <Image
-      className="rotate-[-3deg] relative left-12"
+      className="rotate-[-3deg]"
       src={"/assets/images/scratch_logo.png"}
       width={450}
       height={200}
       alt="Scratch Logo"
       />
 
-      <Image
-      className="rotate-[-2deg] relative right-3 bottom-4"
+      {/* <Image
+      className="rotate-[-2deg] relative right-20 bottom-4"
       src={"/assets/images/exclamation.png"}
-      width={120}
-      height={300}
+      width={140}
+      height={120}
       alt="!"
-      />
+      /> */}
     
     </div>
     <p className='desc text-center'>
@@ -37,7 +38,6 @@ const Home = () => (
     </p>
 
     <Feed />
-    <Footer />
   </section>
 );
 

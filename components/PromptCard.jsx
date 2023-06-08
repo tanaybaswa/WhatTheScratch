@@ -9,7 +9,13 @@ const PromptCard = ({ post, handleEdit, handleDelete, handleTagClick }) => {
   const { data: session } = useSession();
   const pathName = usePathname();
   const router = useRouter();
-  const color = "green";
+  let color = "shadow-[inset_0px_-30px_50px_0_rgb(200,120,50,0.2)]";
+
+  if(post.diff == "Hard"){
+    color = "shadow-[inset_0px_-30px_50px_0_rgb(200,30,30,0.2)]";
+  } else if(post.diff == "Easy"){
+    color = "shadow-[inset_0px_-30px_50px_0_rgb(90,200,90,0.2)]";
+  }
 
   const [copied, setCopied] = useState("");
 
@@ -28,68 +34,71 @@ const PromptCard = ({ post, handleEdit, handleDelete, handleTagClick }) => {
   };
 
   return (
-    <div className='prompt_card_two'>
-      <div className='flex justify-between items-start gap-5'>
+    <div className="break-inside-avoid">
+      <div className="prompt_card_top">
         <div
-          className='flex-1 flex justify-start items-center gap-3 cursor-pointer'
-          onClick={handleProfileClick}
-        >
-          <Image
-            src={post.creator.image}
-            alt='user_image'
-            width={40}
-            height={40}
-            className='rounded-full object-contain'
-          />
+            className='flex-1 flex justify-start items-center gap-3 cursor-pointer'
+            onClick={handleProfileClick}
+            >
+            <Image
+              src={post.creator.image}
+              alt='user_image'
+              width={37}
+              height={37}
+              className='rounded-full object-contain'
+              />
 
-          <div className='flex flex-col'>
-            <h3 className='font-satoshi font-semibold text-gray-900'>
-              {post.creator.username}
-            </h3>
-            {/* <p className='font-inter text-sm text-gray-500'>
-              {post.creator.email}
-            </p> */}
+            <div className='flex flex-col'>
+              <h3 className='font-satoshi font-semibold text-blue-500 text-lg'>
+                {post.creator.username}
+              </h3>
+              {/* <p className='font-inter text-sm text-gray-500'>
+                {post.creator.email}
+              </p> */}
+            </div>
           </div>
-        </div>
-
-        <div className='copy_btn' onClick={handleCopy}>
+          <div className='copy_btn' onClick={handleCopy}>
           <Image
             src={
               copied === post.prompt
-                ? "/assets/icons/tick.svg"
-                : "/assets/icons/copy.svg"
+              ? "/assets/icons/tick.svg"
+              : "/assets/icons/copy.svg"
             }
             alt={copied === post.prompt ? "tick_icon" : "copy_icon"}
             width={12}
             height={12}
-          />
+            />
         </div>
       </div>
 
-      <p className='my-4 font-satoshi text-sm text-gray-700'>{post.prompt}</p>
+    <div className={`prompt_card_two ${color}`}>
+      <p className='my-4 font-satoshi text-lg text-gray-700'>{post.prompt}</p>
       <p
-        className='font-inter text-sm blue_gradient cursor-pointer flex gap-2'
+        className='font-satoshi text-md flex gap-2'
         // onClick={() => handleTagClick && handleTagClick(post.tag)}
-      >
-        {Array.isArray(post.tag) && post.tag.map((t) => (
-          <div
+        >
+    
+        {Array.isArray(post.tag) && post.tag.map((t, index) => (
+          <span
+          key={index}
           onClick={() => handleTagClick && handleTagClick(t)}
+          className="text-blue-500 cursor-pointer"
           >
             {t}
-          </div>
+          </span>
           ))}
         
       </p>
 
-      {post.diff == 'Hard'?(<p className="font-bold text-md font-satoshi my-2 text-red-600">
+      {post.diff == 'Hard'?(<p className="font-bold text-lg font-satoshi my-2 text-red-600">
         {post.diff}
       </p>):<></>}
 
-      {post.diff == 'Medium'?(<p className="font-bold text-md font-satoshi my-2 text-orange-500">
+      {post.diff == 'Medium'?(<p className="font-bold text-lg font-satoshi my-2 text-orange-500">
         {post.diff}
       </p>):<></>}
 
-      {post.diff == 'Easy'?(<p className="font-bold text-md font-satoshi my-2 text-green-500">
+      {post.diff == 'Easy'?(<p className="font-bold text-lg font-satoshi my-2 text-green-500">
         {post.diff}
       </p>):<></>}
 
@@ -97,19 +106,20 @@ const PromptCard = ({ post, handleEdit, handleDelete, handleTagClick }) => {
       {session?.user.id === post.creator._id && pathName === "/profile" && (
         <div className='mt-5 flex-center gap-4 border-t border-gray-100 pt-3'>
           <p
-            className='font-inter text-sm green_gradient cursor-pointer'
+            className='font-inter text-sm text-green-600 font-semibold cursor-pointer'
             onClick={handleEdit}
-          >
+            >
             Edit
           </p>
           <p
-            className='font-inter text-sm orange_gradient cursor-pointer'
+            className='font-inter text-sm text-orange-600 font-semibold cursor-pointer'
             onClick={handleDelete}
-          >
+            >
             Delete
           </p>
         </div>
       )}
+    </div>
     </div>
   );
 };

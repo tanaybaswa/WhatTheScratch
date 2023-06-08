@@ -33,21 +33,21 @@ const Nav = () => {
           alt='logo'
           width={150}
           height={80}
-          className='object-contain'
+          className='object-contain hidden md:flex'
         />
         <Image
           src='/assets/images/scratch_logo.png'
           alt='logo'
           width={150}
           height={50}
-          className='object-contain relative right-4'
+          className='object-contain relative right-4 hidden md:flex'
         />
       </Link>
 
       {/* Desktop Navigation */}
       <div className='sm:flex hidden'>
         {session?.user ? (
-          <div className='flex gap-3 md:gap-5'>
+          <div className='flex gap-3 md:gap-5 flex-center'>
             <Link href='/create-prompt' className='black_btn'>
               Create Post
             </Link>
@@ -91,15 +91,15 @@ const Nav = () => {
           <div className='flex'>
             <Image
               src={session?.user.image}
-              width={37}
-              height={37}
+              width={45}
+              height={45}
               className='rounded-full'
               alt='profile'
               onClick={() => setToggleDropdown(!toggleDropdown)}
             />
 
             {toggleDropdown && (
-              <div className='dropdown'>
+              <div className='dropdown z-10 shadow-lg border-orange-300 border-4'>
                 <Link
                   href='/profile'
                   className='dropdown_link'

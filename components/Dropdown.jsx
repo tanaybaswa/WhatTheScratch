@@ -44,14 +44,18 @@ import React, {useState} from 'react'
 
 // export default Dropdown
 
-const Dropdown = ({handleChange}) => {
+const Dropdown = ({handleChange, isAll}) => {
 
-  const [color, setcolor] = useState("custom_color_gray");
-  const [difficulty, setDifficulty] = useState("All Difficulties");
-  let selected = "Hello";
+  let startColor = "custom_color_green";
+
+  if(isAll){
+    startColor = "custom_color_gray";
+  }
+
+  const [color, setcolor] = useState(startColor);
+
 
   const handleSelect = (e) => {
-    setDifficulty(e.target.value);
     handleChange(e);
   }
 
@@ -75,11 +79,12 @@ const Dropdown = ({handleChange}) => {
     onChange={handleSelect}
     >
       
-      <option 
+      {isAll && (<option 
       className={`custom_color_gray`}
       onClick={handleClick}>
         All Difficulties
-      </option>
+      </option>)
+      }
 
       <option 
       className={`custom_color_green`}

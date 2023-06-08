@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
+const Filter = require('bad-words');
 
 import Form from "@components/Form";
 
@@ -10,8 +11,11 @@ const UpdatePrompt = () => {
   const searchParams = useSearchParams();
   const promptId = searchParams.get("id");
 
-  const [post, setPost] = useState({ prompt: "", tag: "", });
+  const [post, setPost] = useState({ prompt: "", tag: [""], diff:"Easy"});
   const [submitting, setIsSubmitting] = useState(false);
+
+  const filter = new Filter();
+  filter.addWords("69", "sixty nine", "sixtynine", "muthafucka");
 
   useEffect(() => {
     const getPromptDetails = async () => {
@@ -21,6 +25,7 @@ const UpdatePrompt = () => {
       setPost({
         prompt: data.prompt,
         tag: data.tag,
+        diff: data.diff,
       });
     };
 
@@ -31,6 +36,16 @@ const UpdatePrompt = () => {
     e.preventDefault();
     setIsSubmitting(true);
 
+    if (filter.isProfane(post.prompt)){
+
+      alert("Sorry, this content is not allowed.");
+      setIsSubmitting(false);
+      return;
+
+    }
+
+
+
     if (!promptId) return alert("Missing PromptId!");
 
     try {
@@ -39,6 +54,7 @@ const UpdatePrompt = () => {
         body: JSON.stringify({
           prompt: post.prompt,
           tag: post.tag,
+          diff: post.diff,
         }),
       });
 

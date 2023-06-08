@@ -28,7 +28,7 @@ const PromptCard = ({ post, handleEdit, handleDelete, handleTagClick }) => {
   };
 
   return (
-    <div className='prompt_card'>
+    <div className='prompt_card_two'>
       <div className='flex justify-between items-start gap-5'>
         <div
           className='flex-1 flex justify-start items-center gap-3 cursor-pointer'
@@ -68,10 +68,17 @@ const PromptCard = ({ post, handleEdit, handleDelete, handleTagClick }) => {
 
       <p className='my-4 font-satoshi text-sm text-gray-700'>{post.prompt}</p>
       <p
-        className='font-inter text-sm blue_gradient cursor-pointer'
-        onClick={() => handleTagClick && handleTagClick(post.tag)}
+        className='font-inter text-sm blue_gradient cursor-pointer flex gap-2'
+        // onClick={() => handleTagClick && handleTagClick(post.tag)}
       >
-        {post.tag}
+        {Array.isArray(post.tag) && post.tag.map((t) => (
+          <div
+          onClick={() => handleTagClick && handleTagClick(t)}
+          >
+            {t}
+          </div>
+          ))}
+        
       </p>
 
       {post.diff == 'Hard'?(<p className="font-bold text-md font-satoshi my-2 text-red-600">

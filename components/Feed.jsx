@@ -41,6 +41,8 @@ const Feed = () => {
   useEffect(() => {
     fetchPosts();
     console.log("Fetched all posts");
+    fetchPosts();
+    console.log("Fetched all posts");
   }, []);
 
   const filterPrompts = (searchtext) => {
@@ -125,7 +127,7 @@ const Feed = () => {
   const handleTagClick = (tagName) => {
     setSearchText(tagName);
 
-    const searchResult = filterPrompts(tagName);
+    const searchResult = filterPosts(tagName, difficulty);
     setSearchedResults(searchResult);
   };
 
@@ -146,7 +148,7 @@ const Feed = () => {
           />
       </form>
 
-      <Dropdown handleChange={handleDifficultyChange}/>
+      <Dropdown handleChange={handleDifficultyChange} isAll={true}/>
 
       </div>
       {/* All Prompts */}

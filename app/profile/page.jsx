@@ -50,7 +50,7 @@ const MyProfile = () => {
   return (
     <Profile
       name={session?.user?.name}
-      desc='Welcome to your personalized profile page. Share your exceptional ideas and inspire others with the power of your imagination!'
+      desc="Welcome to your profile page. Admire, edit, or delete your old posts!"
       data={myPosts}
       handleEdit={handleEdit}
       handleDelete={handleDelete}

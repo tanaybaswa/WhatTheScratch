@@ -3,36 +3,11 @@
 import { useState, useEffect } from "react";
 
 import Dropdown from "./Dropdown";
+import PromptCardList from "./PromptCardList";
 
-import PromptCard from "./PromptCard";
-import { set } from "mongoose";
 import { useSelectedLayoutSegment } from "next/navigation";
-import Loading from "@app/profile/loading";
 
-const PromptCardList = ({ data, handleTagClick }) => {
 
-  if(!data || data.length == 0){
-    return (
-      <div className="my-14 text-3xl desc text-center">
-        <Loading/>
-        Loading posts. <br/> Please reload page if needed. <br/> 
-        <span className="text-xl mt-4">(Your search may have no results.)</span>
-      </div>
-    )
-  };
-
-  return (
-    <div className='mt-16 prompt_layout'>
-      {data.map((post) => (
-        <PromptCard
-          key={post._id}
-          post={post}
-          handleTagClick={handleTagClick}
-        />
-      ))}
-    </div>
-  );
-};
 
 const Feed = () => {
   // Search states

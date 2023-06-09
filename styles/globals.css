@@ -141,9 +141,13 @@
   @apply mt-16 mx-auto w-full max-w-xl flex justify-center items-center flex-col gap-2;
 }
 
+.profile_feed {
+  @apply mx-auto w-full max-w-xl flex justify-center items-center flex-col gap-2;
+}
+
 /* Form Component */
 .form_textarea {
-  @apply w-full flex rounded-lg h-[200px] mt-2 p-3 text-sm text-gray-500 outline-0;
+  @apply w-full flex rounded-lg h-[200px] mt-2 p-3 text-lg text-gray-500 outline-0;
 }
 
 .form_input {
@@ -151,7 +155,7 @@
 }
 
 .tag_input {
-  @apply w-1/3 flex rounded-lg my-2 p-3 text-sm text-gray-500 outline-0;
+  @apply w-1/3 flex rounded-lg my-2 p-3 text-lg text-gray-500 outline-0;
 }
 
 /* Nav Component */

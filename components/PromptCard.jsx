@@ -58,7 +58,7 @@ const PromptCard = ({ post, handleEdit, handleDelete, handleTagClick }) => {
   };
 
   return (
-    <div className="break-inside-avoid shadow">
+    <div className="break-inside-avoid shadow-lg rounded-t-3xl">
       <div className="prompt_card_top">
         <div
             className='flex-1 flex justify-start items-center gap-3 cursor-pointer'

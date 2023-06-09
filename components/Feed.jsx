@@ -15,7 +15,8 @@ const PromptCardList = ({ data, handleTagClick }) => {
     return (
       <div className="my-14 text-3xl desc text-center">
         <Loading/>
-        Loading posts. <br/> Please reload page if needed.
+        Loading posts. <br/> Please reload page if needed. <br/> 
+        <span className="text-xl mt-4">(Your search may have no results.)</span>
       </div>
     )
   };
@@ -50,8 +51,6 @@ const Feed = () => {
 
 
   useEffect(() => {
-    fetchPosts();
-    console.log("Fetched all posts");
     fetchPosts();
     console.log("Fetched all posts");
   }, []);
@@ -119,7 +118,7 @@ const Feed = () => {
     <section className='feed'>
       <div className="flex w-full gap-2 items-center">
 
-      <form className='w-[70%] flex box-border'>
+      <form className='w-[67%] flex box-border'>
         <input
           type='text'
           placeholder='Search for a tag or a username or keyword'

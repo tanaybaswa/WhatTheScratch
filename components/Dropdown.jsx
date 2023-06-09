@@ -47,10 +47,10 @@ import React, {useState} from 'react'
 
 const Dropdown = ({handleChange, isAll}) => {
 
-  let startColor = "custom_color_green";
+  let startColor = "text-green-500";
 
   if(isAll){
-    startColor = "custom_color_gray";
+    startColor = "text-gray-400";
   }
 
   const [color, setcolor] = useState(startColor);
@@ -61,13 +61,13 @@ const Dropdown = ({handleChange, isAll}) => {
     // console.log(name);
     
     if(name == "Easy"){
-      setcolor("custom_color_green")
+      setcolor("text-green-500")
     } else if(name == "Medium"){
-      setcolor("custom_color_orange")
+      setcolor("text-orange-500")
     } else if(name == "Hard"){
-      setcolor("custom_color_red")
+      setcolor("text-red-600")
     } else{
-      setcolor("custom_color_gray")
+      setcolor("text-gray-400")
     }
 
     handleChange(e);
@@ -78,29 +78,29 @@ const Dropdown = ({handleChange, isAll}) => {
   };
 
   return (
-    <select className={`${color} text-lg py-2.5 pl-2 leading-8 border-2 border-gray-300 bg-white rounded-md cursor-pointer font-bold font-satoshi shadow-lg focus:border-orange-500 w-max-content box-border`}
+    <select className={`${color} text-lg py-2.5 pl-2 leading-8 border-2 border-gray-200 bg-white rounded-md cursor-pointer font-bold font-satoshi shadow-lg focus:border-orange-500 w-max-content box-border`}
     onChange={handleSelect}
     >
       
       {isAll && (<option 
-      className={`custom_color_gray`}
+      className={`text-gray-400`}
       onClick={handleClick}>
         All Difficulties
       </option>)
       }
 
       <option 
-      className={`custom_color_green`}
+      className={`text-green-500`}
       onClick={handleClick}>
         Easy
       </option>
 
-      <option className={`custom_color_orange`}
+      <option className={`text-orange-500`}
       onClick={handleClick}>
         Medium
       </option>
 
-      <option className={`custom_color_red`}
+      <option className={`text-red-600`}
       onClick={handleClick}>
         Hard
       </option>

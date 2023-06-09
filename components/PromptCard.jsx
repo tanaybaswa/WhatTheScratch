@@ -1,23 +1,37 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Image from "next/image";
 import { useSession } from "next-auth/react";
 import { usePathname, useRouter } from "next/navigation";
+
 
 const PromptCard = ({ post, handleEdit, handleDelete, handleTagClick }) => {
   const { data: session } = useSession();
   const pathName = usePathname();
   const router = useRouter();
-  let color = "shadow-[inset_0px_-30px_50px_0_rgb(200,120,50,0.2)]";
+  let color = "shadow-[inset_0px_-30px_50px_0_rgb(200,200,200,0)]";
 
-  if(post.diff == "Hard"){
-    color = "shadow-[inset_0px_-30px_50px_0_rgb(200,30,30,0.2)]";
-  } else if(post.diff == "Easy"){
-    color = "shadow-[inset_0px_-30px_50px_0_rgb(90,200,90,0.2)]";
-  }
+  // if(post.diff == "Hard"){
+  //   color = "shadow-[inset_0px_-30px_50px_0_rgb(200,30,30,0.2)]";
+  // } else if(post.diff == "Easy"){
+  //   color = "shadow-[inset_0px_-30px_50px_0_rgb(90,200,90,0.2)]";
+  // } else if(post.diff == "Medium"){
+  //   color = "shadow-[inset_0px_-30px_50px_0_rgb(200,120,50,0.2)]";
+  // }
 
-  const [copied, setCopied] = useState("");
+  const [toggle, setToggle] = useState(false);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const response = await fetch(`/api/users/${session?.user.id}/${post._id}`);
+      const data = await response.json();
+
+      setToggle(data.completed);
+    };
+
+    if (session?.user.id) fetchData();
+  }, [session?.user.id]);
 
   const handleProfileClick = () => {
     console.log(post);
@@ -27,14 +41,24 @@ const PromptCard = ({ post, handleEdit, handleDelete, handleTagClick }) => {
     router.push(`/profile/${post.creator._id}?name=${post.creator.username}`);
   };
 
-  const handleCopy = () => {
-    setCopied(post.prompt);
-    navigator.clipboard.writeText(post.prompt);
-    setTimeout(() => setCopied(false), 3000);
+  // const handleCopy = () => {
+  //   setCopied(post.prompt);
+  //   navigator.clipboard.writeText(post.prompt);
+  //   setTimeout(() => setCopied(false), 3000);
+  // };
+
+  const handleToggle = async () => {
+    setToggle((prev) => !prev);
+    const response = await fetch(`/api/users/${session?.user.id}/${post._id}`,{
+      method:"PATCH",
+      body:{}
+    });
+    const jsonResponse = await response.json();
+    console.log(jsonResponse);
   };
 
   return (
-    <div className="break-inside-avoid">
+    <div className="break-inside-avoid shadow">
       <div className="prompt_card_top">
         <div
             className='flex-1 flex justify-start items-center gap-3 cursor-pointer'
@@ -57,16 +81,16 @@ const PromptCard = ({ post, handleEdit, handleDelete, handleTagClick }) => {
               </p> */}
             </div>
           </div>
-          <div className='copy_btn' onClick={handleCopy}>
+          <div className='copy_btn_two' onClick={handleToggle}>
           <Image
             src={
-              copied === post.prompt
-              ? "/assets/icons/tick.svg"
-              : "/assets/icons/copy.svg"
+              toggle
+              ? "/assets/images/done3.png"
+              : "/assets/images/lock.png"
             }
-            alt={copied === post.prompt ? "tick_icon" : "copy_icon"}
-            width={12}
-            height={12}
+            alt={toggle? "Done" : "Locked"}
+            width={24}
+            height={24}
             />
         </div>
       </div>

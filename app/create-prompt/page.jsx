@@ -3,14 +3,12 @@
 import { useState } from "react";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
-const Filter = require('bad-words');
+import checkBadContent from "@utils/badcontent";
 
 import Form from "@components/Form";
 
 const CreatePrompt = () => {
 
-  const filter = new Filter();
-  filter.addWords("69", "sixty nine", "sixtynine", "muthafucka");
   const router = useRouter();
   const { data: session } = useSession();
 
@@ -21,7 +19,7 @@ const CreatePrompt = () => {
     e.preventDefault();
     setIsSubmitting(true);
 
-    if (filter.isProfane(post.prompt)){
+    if (checkBadContent(post)){
 
       alert("Sorry, this content is not allowed.");
       setIsSubmitting(false);

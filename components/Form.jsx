@@ -1,11 +1,10 @@
 import Link from "next/link";
 import TagInput from "./TagInput";
 import Dropdown from "./Dropdown";
-const Filter = require('bad-words');
 
 
 const Form = ({ type, post, setPost, submitting, handleSubmit }) => {
-  const filter = new Filter();
+  
   const handleTagChange = (newTags) =>{
     setPost({...post, tag:newTags});
   }
@@ -14,6 +13,12 @@ const Form = ({ type, post, setPost, submitting, handleSubmit }) => {
     const newDiff = e.target.value;
     setPost({...post, diff:newDiff});
   }
+
+  let verb = "Creat"
+  if (type == "Edit"){
+    verb = "Edit";
+  }
+
 
 
   return (
@@ -52,15 +57,7 @@ const Form = ({ type, post, setPost, submitting, handleSubmit }) => {
               (game, animation, physics, etc.)
             </span>
           </span>
-          {/* <input
-            value={post.tag}
-            onChange={(e) => setPost({ ...post, tag: e.target.value })}
-            type='text'
-            placeholder='#Tag'
-            required
-            className='form_input'
-          /> */}
-
+        
           <TagInput tags={post.tag} setTags={handleTagChange}/>
         </label>
         
@@ -68,14 +65,7 @@ const Form = ({ type, post, setPost, submitting, handleSubmit }) => {
           <span className='font-satoshi flex font-semibold text-lg text-gray-800 w-full mb-1 pl-1'>
             Difficulty
           </span>
-          {/* <input
-            value={post.diff}
-            onChange={(e) => setPost({ ...post, diff: e.target.value })}
-            type='text'
-            placeholder='Difficulty'
-            required
-            className='form_input'
-          /> */}
+          
           <Dropdown handleChange={handleDiffChange} isAll={false}/>
         </label>
         
@@ -91,7 +81,7 @@ const Form = ({ type, post, setPost, submitting, handleSubmit }) => {
             disabled={submitting}
             className='px-5 py-1.5 text-lg black_btn'
           >
-            {submitting ? `${type}ing...` : type}
+            {submitting ? `${verb}ing...` : type}
           </button>
         </div>
       </form>

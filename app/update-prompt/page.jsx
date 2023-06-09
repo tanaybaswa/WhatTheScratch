@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
-const Filter = require('bad-words');
+import checkBadContent from "@utils/badcontent";
 
 import Form from "@components/Form";
 
@@ -14,9 +14,7 @@ const UpdatePrompt = () => {
   const [post, setPost] = useState({ prompt: "", tag: [""], diff:"Easy"});
   const [submitting, setIsSubmitting] = useState(false);
 
-  const filter = new Filter();
-  filter.addWords("69", "sixty nine", "sixtynine", "muthafucka");
-
+  
   useEffect(() => {
     const getPromptDetails = async () => {
       const response = await fetch(`/api/prompt/${promptId}`);
@@ -36,7 +34,7 @@ const UpdatePrompt = () => {
     e.preventDefault();
     setIsSubmitting(true);
 
-    if (filter.isProfane(post.prompt)){
+    if (checkBadContent(post)){
 
       alert("Sorry, this content is not allowed.");
       setIsSubmitting(false);

@@ -53,6 +53,12 @@ const Feed = () => {
   useEffect(() => {
     fetchPosts();
     console.log("Fetched all posts");
+
+    fetchPosts();
+    console.log("Fetched all posts");
+
+    fetchPosts();
+    console.log("Fetched all posts");
   }, []);
 
   const handleDifficultyChange = (e) => {

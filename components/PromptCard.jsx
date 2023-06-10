@@ -5,6 +5,9 @@ import Image from "next/image";
 import { useSession } from "next-auth/react";
 import { usePathname, useRouter } from "next/navigation";
 
+import {BsFillArrowUpRightSquareFill} from "react-icons/bs"
+import {LuExternalLink} from "react-icons/lu";
+
 
 const PromptCard = ({ post, handleEdit, handleDelete, handleTagClick }) => {
   const { data: session } = useSession();
@@ -114,19 +117,36 @@ const PromptCard = ({ post, handleEdit, handleDelete, handleTagClick }) => {
         
       </p>
 
-      {post.diff == 'Hard'?(<p className="font-bold text-lg font-satoshi my-2 text-red-600">
-        {post.diff}
-      </p>):<></>}
+      
 
-      {post.diff == 'Medium'?(<p className="font-bold text-lg font-satoshi my-2 text-orange-500">
-        {post.diff}
-      </p>):<></>}
-
-      {post.diff == 'Easy'?(<p className="font-bold text-lg font-satoshi my-2 text-green-500">
-        {post.diff}
-      </p>):<></>}
+      <div className="flex justify-between items-center my-4">
 
 
+        {post.diff == 'Hard'?(<p className="font-bold text-lg font-satoshi text-red-600">
+          {post.diff}
+        </p>):<></>}
+
+        {post.diff == 'Medium'?(<p className="font-bold text-lg font-satoshi text-orange-500">
+          {post.diff}
+        </p>):<></>}
+
+        {post.diff == 'Easy'?(<p className="font-bold text-lg font-satoshi text-green-500">
+          {post.diff}
+        </p>):<></>}
+
+
+        <p className='font-satoshi text-sm font-semibold text-blue-400'>
+          <a 
+          href={post.scratch_link} 
+          target="_blank"
+          className="flex justify-normal gap-1"
+          >
+            {/* <BsFillArrowUpRightSquareFill opacity={1} size={18}/> */}
+            <LuExternalLink size={24}/> 
+          </a>
+        </p>
+
+      </div>
       {session?.user.id === post.creator._id && pathName === "/profile" && (
         <div className='mt-5 flex-center gap-4 border-t border-gray-100 pt-3'>
           <p

@@ -11,7 +11,7 @@ const UpdatePrompt = () => {
   const searchParams = useSearchParams();
   const promptId = searchParams.get("id");
 
-  const [post, setPost] = useState({ prompt: "", tag: [""], diff:"Easy"});
+  const [post, setPost] = useState({ prompt: "", tag: [""], diff:"Easy", scratch_link:""});
   const [submitting, setIsSubmitting] = useState(false);
 
   
@@ -24,6 +24,7 @@ const UpdatePrompt = () => {
         prompt: data.prompt,
         tag: data.tag,
         diff: data.diff,
+        scratch_link: data.scratch_link,
       });
     };
 
@@ -33,6 +34,18 @@ const UpdatePrompt = () => {
   const updatePrompt = async (e) => {
     e.preventDefault();
     setIsSubmitting(true);
+
+    const regex = /^https:\/\/scratch\.mit\.edu/;
+    const isMatch = regex.test(post.scratch_link);
+
+    if(!isMatch){
+
+      alert("Sorry, you must use a Scratch link");
+      setIsSubmitting(false);
+
+      return;
+
+    }
 
     if (checkBadContent(post)){
 
@@ -53,6 +66,7 @@ const UpdatePrompt = () => {
           prompt: post.prompt,
           tag: post.tag,
           diff: post.diff,
+          scratch_link: post.scratch_link,
         }),
       });
 

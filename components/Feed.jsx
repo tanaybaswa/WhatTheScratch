@@ -34,6 +34,13 @@ const Feed = () => {
 
     fetchPosts();
     console.log("Fetched all posts");
+
+    fetchPosts();
+    console.log("Fetched all posts");
+
+    fetchPosts();
+    console.log("Fetched all posts");
+
   }, []);
 
   const handleDifficultyChange = (e) => {

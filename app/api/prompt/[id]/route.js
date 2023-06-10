@@ -16,7 +16,7 @@ export const GET = async (request, { params }) => {
 }
 
 export const PATCH = async (request, { params }) => {
-    const { prompt, tag, diff } = await request.json();
+    const { prompt, tag, diff, scratch_link } = await request.json();
 
     try {
         await connectToDB();
@@ -32,6 +32,7 @@ export const PATCH = async (request, { params }) => {
         existingPrompt.prompt = prompt;
         existingPrompt.tag = tag;
         existingPrompt.diff = diff;
+        existingPrompt.scratch_link = scratch_link;
 
         await existingPrompt.save();
 

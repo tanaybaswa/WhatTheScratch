@@ -68,6 +68,19 @@ const Form = ({ type, post, setPost, submitting, handleSubmit }) => {
           
           <Dropdown handleChange={handleDiffChange} isAll={false}/>
         </label>
+
+        <label>
+          <span className='font-satoshi flex font-semibold text-lg text-gray-800 w-full mb-1 pl-1'>
+            Scratch Link:
+          </span>
+
+          <input type="text" className="form_input"
+          value={post.scratch_link}
+          onChange={(e) => setPost({ ...post, scratch_link: e.target.value })}
+          placeholder='Paste your link here'
+          />
+
+        </label>
         
         
 

@@ -13,11 +13,23 @@ const CreatePrompt = () => {
   const { data: session } = useSession();
 
   const [submitting, setIsSubmitting] = useState(false);
-  const [post, setPost] = useState({ prompt: "", tag: [""], diff:"Easy"});
+  const [post, setPost] = useState({ prompt: "", tag: [""], diff:"Easy", scratch_link:""});
 
   const createPrompt = async (e) => {
     e.preventDefault();
     setIsSubmitting(true);
+
+    const regex = /^https:\/\/scratch\.mit\.edu/;
+    const isMatch = regex.test(post.scratch_link);
+
+    if(post.scratch_link && !isMatch){
+
+      alert("Sorry, you must use a Scratch link");
+      setIsSubmitting(false);
+
+      return;
+
+    }
 
     if (checkBadContent(post)){
 
@@ -33,6 +45,7 @@ const CreatePrompt = () => {
               userId: session?.user.id,
               tag: post.tag,
               diff: post.diff,
+              scratch_link: post.scratch_link,
             }),
           });
 

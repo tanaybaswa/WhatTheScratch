@@ -1,4 +1,5 @@
 import { Schema, model, models } from 'mongoose';
+import Link from 'next/link';
 
 const PromptSchema = new Schema({
   creator: {
@@ -17,7 +18,13 @@ const PromptSchema = new Schema({
     type: String,
     required: [true, 'Difficulty is required.'],
     default: "Medium",
-  }
+  },
+  scratch_link: {
+    type: String,
+    required: [false],
+    default: "https:\/\/scratch.mit.edu",
+    match: [/^https:\/\/scratch\.mit\.edu/ ,"Must be a scratch link"],
+  },
 });
 
 const Prompt = models.Prompt || model('Prompt', PromptSchema);

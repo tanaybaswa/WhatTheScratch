@@ -13,6 +13,10 @@ const checkBadContent = (post) => {
       return true;
     }
 
+    if(filter.isProfane(post.scratch_link)){
+      return true;
+    }
+
     return false;
 }
 

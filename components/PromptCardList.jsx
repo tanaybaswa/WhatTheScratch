@@ -7,7 +7,7 @@ const PromptCardList = ({ data, handleTagClick, handleEdit, handleDelete }) => {
       return (
         <div className="my-14 text-3xl desc text-center">
           <Loading/>
-          Loading posts. <br/> Please reload page if needed. <br/> 
+          Loading posts. <br/> Please reload page after 3 seconds. <br/> 
           <span className="text-xl mt-4">(Your search may have no results.)</span>
         </div>
       )

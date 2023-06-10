@@ -23,7 +23,6 @@ const PromptSchema = new Schema({
     type: String,
     required: [false],
     default: "https:\/\/scratch.mit.edu",
-    match: [/^https:\/\/scratch\.mit\.edu/ ,"Must be a scratch link"],
   },
 });
 
